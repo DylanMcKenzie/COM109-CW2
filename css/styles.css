@@ -1,0 +1,12 @@
+    @font-face {
+    font-family: 'Monday Feelings';
+    src: url('../../fonts/MondayFeelings-7BD2l.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Monday Feelings', sans-serif;
+      background-color: #f9f3fc;
+    }
