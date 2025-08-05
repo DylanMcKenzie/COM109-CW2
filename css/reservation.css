@@ -1,0 +1,33 @@
+.submit-btn {
+  background-color: var(--color-secondary);
+  color: white;
+}
+.border-accent {
+  border-color: var(--color-accent);
+}
+.title {
+  font-size: var(--font-title);
+  color: var(--color-text);
+}
+.form-control:focus,
+.form-select:focus {
+  box-shadow: var(--color-accent);
+  border-color: var(--color-primary);
+}
+input[type="checkbox"] {
+  border-color: var(--color-accent);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  box-shadow: none;
+}
+
+input[type="checkbox"]:focus {
+  box-shadow: none;
+  border-color: var(--color-accent);
+}
+.pet-sidebar {
+  background-color: var(--color-background);
+}
