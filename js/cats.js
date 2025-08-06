@@ -2,7 +2,6 @@ $(document).ready(function () {
   let allCats = [];
   let filteredCats = [];
   let likedCats = JSON.parse(localStorage.getItem("likedCats") || "[]");
-  let reservedCats = JSON.parse(localStorage.getItem("reservedCats") || "[]");
 
   $("#navbar").load("../components/navbar/navbar.html", function () {
     $(".nav-link").removeClass("active");
@@ -45,23 +44,22 @@ $(document).ready(function () {
     catsGrid.empty();
 
     if (filteredCats.length === 0) {
-      $("#no-results").show();
-      catsGrid.hide();
+      $("#no-results").addClass("show");
+      catsGrid.addClass("hidden");
       return;
     }
 
-    $("#no-results").hide();
-    catsGrid.show();
+    $("#no-results").removeClass("show");
+    catsGrid.removeClass("hidden");
 
     filteredCats.forEach((cat) => {
-      const isReserved = reservedCats.includes(cat.id);
       const isLiked = likedCats.includes(cat.id);
-      const catCard = createCatCard(cat, isReserved, isLiked);
+      const catCard = createCatCard(cat, isLiked);
       catsGrid.append(catCard);
     });
   }
 
-  function createCatCard(cat, isReserved, isLiked) {
+  function createCatCard(cat, isLiked) {
     const traits = getTraits(cat);
 
     return `
@@ -73,7 +71,6 @@ $(document).ready(function () {
           }" data-cat-id="${cat.id}">
             <i class="fas fa-heart"></i>
           </button>
-          ${isReserved ? '<div class="reserved-badge">Reserved</div>' : ""}
         </div>
         
         <div class="cat-info">
@@ -96,14 +93,8 @@ $(document).ready(function () {
           
           <p class="cat-about">${cat.about}</p>
           
-          <button class="adopt-btn" data-cat-id="${
-            cat.id
-          }" ${isReserved ? "disabled" : ""}>
-            ${
-              isReserved
-                ? '<i class="fas fa-check"></i> Reserved'
-                : '<i class="fas fa-heart"></i> Adopt Me'
-            }
+          <button class="adopt-btn" data-cat-id="${cat.id}">
+            <i class="fas fa-heart"></i> Adopt Me
           </button>
         </div>
       </div>
@@ -120,11 +111,8 @@ $(document).ready(function () {
   }
 
   function updateStats() {
-    const totalCats = allCats.length;
-    const filteredCount = filteredCats.length;
-
-    $("#total-cats").text(totalCats);
-    $("#filtered-cats").text(filteredCount);
+    $("#total-cats").text(allCats.length);
+    $("#filtered-cats").text(filteredCats.length);
     $("#total-likes").text(likedCats.length);
   }
 
@@ -169,15 +157,14 @@ $(document).ready(function () {
     updateStats();
   }
 
-  $(
-    "#breed-filter, #age-filter, #children-filter, #pets-filter, #gender-filter, #location-filter, #favorites-filter"
-  ).on("change", applyFilters);
+  const filterSelectors =
+    "#breed-filter, #age-filter, #children-filter, #pets-filter, #gender-filter, #location-filter, #favorites-filter";
+
+  $(filterSelectors).on("change", applyFilters);
   $("#name-search").on("input", applyFilters);
 
   $("#reset-filters").on("click", function () {
-    $(
-      "#breed-filter, #age-filter, #children-filter, #pets-filter, #gender-filter, #location-filter, #favorites-filter"
-    ).val("");
+    $(filterSelectors).val("");
     $("#name-search").val("");
     filteredCats = [...allCats];
     displayCats();
@@ -206,7 +193,7 @@ $(document).ready(function () {
     const catId = $(this).data("cat-id");
     const cat = allCats.find((c) => c.id === catId);
 
-    if (cat && !reservedCats.includes(catId)) {
+    if (cat) {
       localStorage.setItem("selectedCat", JSON.stringify(cat));
       window.location.href = "reservation.html";
     }

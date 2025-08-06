@@ -1,5 +1,5 @@
 .cats-container {
-  background: linear-gradient(135deg, #f9f3fc 0%, #ffe5fd 100%);
+  background: linear-gradient(135deg, white 0%, #ffe5fd 100%);
   min-height: 100vh;
   padding: 2rem 0;
 }
@@ -36,6 +36,11 @@
   margin-bottom: 1rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--color-secondary);
+}
+
+.filters-section h3 {
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
 }
 
 .filter-group {
@@ -84,6 +89,10 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 2rem;
+}
+
+.cats-grid.hidden {
+  display: none;
 }
 
 .cat-card {
@@ -145,20 +154,8 @@
 }
 
 .like-btn.liked {
-  color: #e74c3c;
+  color: var(--color-primary);
   background: white;
-}
-
-.reserved-badge {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: var(--color-error);
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
 }
 
 .cat-info {
@@ -228,20 +225,20 @@
   margin-top: auto;
 }
 
-.adopt-btn:hover:not(:disabled) {
+.adopt-btn:hover {
   background: #4a1dc4;
   transform: translateY(-2px);
-}
-
-.adopt-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
 }
 
 .no-results {
   text-align: center;
   padding: 3rem;
   color: var(--color-text);
+  display: none;
+}
+
+.no-results.show {
+  display: block;
 }
 
 .no-results i {
@@ -279,7 +276,7 @@
   height: 36px;
   border-radius: 12px;
   background: var(--color-primary);
-  color: #ffffff;
+  color: white;
   border: 2px solid var(--color-primary);
   display: flex;
   align-items: center;
