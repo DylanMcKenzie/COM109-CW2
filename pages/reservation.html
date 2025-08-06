@@ -5,15 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reservation</title>
-  <link rel="shortcut icon" type="image/jpg" href="images\cat.jpg" />
+  <link rel="shortcut icon" type="image/jpg" href="../images\cat.jpg" />
 
   <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/reservation.css">
+  <link rel="stylesheet" href="../components/navbar/navbar.css">
 </head>
 
 <body class="bg-light">
-  <h1>Reservation</h1>
+  <div id="navbar"></div>
+
+  <div class="reservation-header">
+    <h1 class="reservation-title">Reservation</h1>
+  </div>
 
   <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
 
@@ -25,12 +31,18 @@
     <div class="row g-5">
       <!-- Pet Sidebar -->
       <div class="col-md-4 pet-sidebar">
-        <img id="pet-img" src="" alt="Pet Image" class="img-fluid rounded shadow-sm mb-3">
+        <img id="pet-img" alt="Pet Image" class="img-fluid rounded shadow-sm mb-3">
         <div class="bg-light p-3 shadow-sm rounded pet-card">
-          <p><strong>Name</strong><br><span id="pet-name">Ted</span></p>
-          <p><strong>Breed</strong><br><span id="pet-name">Lurcher, Tan White</span></p>
-          <p><strong>Age</strong><br><span id="pet-id">5 years old</span></p>
-          <p><strong>Location</strong><br><span id="pet-location">Thirsk Rehoming Centre</span></p>
+          <p class="info-subtitle">Name<br></p>
+          <p id="pet-name"></p>
+          <p class="info-subtitle">Breed<br></p>
+          <p id="pet-breed"></p>
+          <p class="info-subtitle">Gender<br></p>
+          <p id="pet-gender"></p>
+          <p class="info-subtitle">Age<br></p>
+          <p id="pet-age"></p>
+          <p class="info-subtitle">Location<br></p>
+          <p id="pet-location"></p>
         </div>
       </div>
 
@@ -86,10 +98,15 @@
             <input type="postcode" class="form-control border-accent" id="postcode" required>
           </div>
           <div class="mb-3">
-            <label for="number" class="form-label fw-bold">Phone number <span class="text-danger">*</span></label>
-            <input type="number" class="form-control border-accent" id="number" required>
+            <label for="tel" class="form-label fw-bold">Phone number <span class="text-danger">*</span></label>
+            <input type="tel" class="form-control border-accent" id="number" required>
           </div>
-          
+
+          <div class="mb-3">
+            <label for="visit-date" class="form-label fw-bold">Preferred visit date <span
+                class="text-danger">*</span></label>
+            <input type="date" class="form-control border-accent" id="visit-date" required>
+          </div>
 
           <button type="submit" class="btn submit-btn w-100">Submit Reservation</button>
         </form>
