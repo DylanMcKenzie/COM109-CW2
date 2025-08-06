@@ -41,7 +41,7 @@
       color: #3f2171;
       padding: 12px 20px;
       font-size: 3rem;
-      font-weight: 700;
+      font-weight: normal;
       border-radius: 16px;
       text-align: center;
       margin-top: 20px;
@@ -60,7 +60,7 @@
     }
 
     .nav-link {
-    font-weight: 600;
+    font-weight: normal;
     font-size: 1.5rem;
     color: #3f2171;
     text-decoration: none;
