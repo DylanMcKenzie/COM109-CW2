@@ -36,3 +36,43 @@ fetch('../data/pets.json')
   const today = new Date().toISOString().split("T")[0];
   document.getElementById("visit-date").setAttribute("min", today);
 });
+
+$(document).ready(function () {
+  
+  $("#reservation-form").on("submit", function (e) {
+    e.preventDefault();
+
+    if (!this.checkValidity()) {
+      this.reportValidity();
+      return;
+    }
+
+    const reservationData = {
+      pet: {
+        id: getQueryParam('id'),
+        name: $("#pet-name").text(),
+        breed: $("#pet-breed").text(),
+        gender: $("#pet-gender").text(),
+        age: $("#pet-age").text(),
+        location: $("#pet-location").text(),
+        image: $("#pet-img").attr("src"),
+      },
+      user: {
+        title: $("#title").val(),
+        firstName: $("#first-name").val(),
+        lastName: $("#last-name").val(),
+        email: $("#email").val(),
+        address: $("#address").val(),
+        town: $("#town").val(),
+        postcode: $("#postcode").val(),
+        number: $("#number").val(),
+        visitDate: $("#visit-date").val()
+      }
+    };
+
+    localStorage.setItem("reservation", JSON.stringify(reservationData));
+
+    // Redirect to confirmation page
+    window.location.href = "confirmation.html";
+  });
+});

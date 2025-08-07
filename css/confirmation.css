@@ -1,0 +1,92 @@
+
+body {
+  margin: 0;
+  background-color: #fff0f6;
+}
+
+.confirmation-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); 
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background-color: #fff5fa;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #c36ac1;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+h2 {
+  color: #8a3d89;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+strong {
+  color: #7c3e75;
+}
+
+img#confirm-pet-img {
+  border: 6px dashed #ffc2ef;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: #fff;
+  max-width: 500px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+
+#confirm-pet-name {
+  color: #c36ac1;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+#your-details {
+  margin-top: 5px;
+}
+
+.col-md-4, .col-md-8 {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
+.row.g-4 {
+  row-gap: 30px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
