@@ -1,13 +1,13 @@
 :root {
   --text: #07050c;
   --background: #f4f4fa;
-  --primary: #5723e6;
+  --primary: #4b0082; /* changed from #5723e6 to dark purple */
   --secondary: #d0a0d3;
   --accent: #c580b1;
 }
 
+
 body {
-  font-family: 'Rubik', sans-serif;
   background-color: var(--background);
   color: var(--text);
   margin: 0;
@@ -16,25 +16,33 @@ body {
 
 header {
   text-align: center;
-  padding: 2rem;
-  background-color: var(--secondary);
-  border-radius: 0 0 20px 20px;
+  background-color: #d0a0d3;
+  height: 225px;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--text);
   margin: 0;
+  padding-top: 80px;
 }
 
+h1, h2 {
+  color: var(--primary);
+  font-family: "DynaPuff"; /* for the dog names, keep purple */
+}
+
+
 .dog-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Always 3 columns */
   gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 2rem;
 }
+
 
 .dog-card {
   background-color: white;
@@ -63,16 +71,20 @@ h1 {
   border-radius: 12px;
 }
 
-.dog-card h2 {
-  font-size: 1.5rem;
-  margin: 1rem 0 0.5rem;
-  color: var(--primary);
+.dog-card h2 {  
+  font-weight: 700;                   
+  font-size: 1.5rem;                 
+  color: var(--primary);              
   text-align: center;
+  margin: 1rem 0 0.5rem;
 }
+
+
 
 .short-desc {
   text-align: center;
   margin-bottom: 1rem;
+  font-size: 0.9rem;
 }
 
 .details {
@@ -82,32 +94,127 @@ h1 {
   margin-top: 0.5rem;
 }
 
-.read-more-btn,
+
 .adopt-btn {
+  display: inline-block;
+  background: #d0a0d3; /* same as pink header */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: center;
+  transition: background-color 0.2s ease;
+  width: 100%;       /* Makes the button span full width of its container */
+  max-width: 260px;  
+  box-sizing: border-box;
+}
+
+.adopt-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.adopt-btn:hover:not(:disabled) {
+  background: var(--primary); /* dark purple on hover */
+}
+
+
+
+
+.custom-header {
+  position: relative;
+  height: 200px; /* or however tall you need */
+  background-color: #d0a0d3;
+  overflow: hidden;
+}
+ 
+/* Centered title + label */
+.center-content {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+ 
+/* Optional styling */
+.center-content h1 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+}
+ 
+.center-content label {
+  font-size: 1rem;
+}
+ 
+/* Top-left image */
+.top-left-img {
+  position: absolute;
+  top: 0;
+  left: 500;
+  height: 100%;
+}
+ 
+.top-left-img img {
+  height: 100%;
+  width: auto;
+}
+ 
+.bottom-right-img {
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  height: 75%;
+  width: 20%;
+}
+ 
+.bottom-right-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain; /* Keep proportions */
+}
+.read-more-btn {
+  display: inline-block;
+  text-decoration: none;           /* Removes underline */
+  background-color: var(--primary);
+  color: white;
   padding: 0.5rem 1rem;
-  margin-top: 1rem;
+  margin: 0 auto 1rem;             /* Centers horizontally */
   border: none;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s;
+  text-align: center;
 }
 
-.read-more-btn {
-  background-color: var(--primary);
-  color: white;
-}
-
+/* Optional hover effect */
 .read-more-btn:hover {
   background-color: var(--accent);
 }
 
-.adopt-btn {
-  background-color: var(--secondary);
-  color: white;
+.dog-info .info-item {
+  font-size: 0.85rem;  /* smaller than description */
+  color: #555;     
+  display: flex;
+  justify-content: space-between; /* spread out evenly */
+  margin: 0.5rem 0 1rem;
+  flex: 1; /* equal width */
+  text-align: center; /* center text inside each */
+}
+    /* optional: a slightly lighter shade */
+
+  
+.center-content h1 {
+  font-family: inherit;
+  font-weight: normal;
+  font-size: 2.5rem;
+  margin: 0 0 15px 0;
 }
 
-.adopt-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
+
+
+
+
