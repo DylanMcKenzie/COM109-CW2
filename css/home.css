@@ -1,0 +1,249 @@
+/* Reusable Section */
+
+.section--soft {
+  background-color: #f9f3fc;
+  padding: 50px 20px;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.section--soft h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #3f2171;
+}
+
+.grid-3 {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-bottom: 70px;
+}
+
+.section--arc {
+  position: relative;
+  overflow: visible;               
+  z-index: 1;
+}
+.section--arc::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10%;                       
+  width: min(1500px, 95%);
+  height: 110%;                    
+  background: var(--color-secondary, #d0a0d3);
+  border-radius: 60% / 52%;        
+  opacity: 0.22;                  
+  z-index: -1;                    
+}
+
+/* Hero Slider */
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 500px; 
+  overflow: hidden;
+  margin-top: -55px; 
+}
+
+.hero-slider__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slider__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-slider__image.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-slider__dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.hero-slider__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-slider__dot.active {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-slider__caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  padding: 0 20px;
+  z-index: 2;
+  pointer-events: none; 
+}
+
+
+/* About Section */
+
+.about-section {
+  background-color: #f9f3fc; 
+  padding: 100px 20px;
+  padding-bottom: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 55px;
+  overflow: hidden;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 550px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-height: 550px;
+  display: block;
+  border-top-left-radius: 55px;
+  border-bottom-left-radius: 55px;
+}
+
+.about-image {
+  flex: 1;
+}
+
+.about-text {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #3f2171;
+}
+
+.about-text p {
+  font-size: 1.2rem;
+  color: #4b4b4b;
+  line-height: 1.6;
+}
+
+
+/* Adoption Section */
+
+.step-box {
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px 20px;
+  width: 370px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0; 
+  transform: translateY(40px); 
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.step-box h3 {
+  color: #3f2171;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.step-box p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.step-box.show {
+  opacity: 1;          
+  transform: translateY(0); 
+}
+
+/* Lost Pet Section */
+
+.polaroid {
+  background: #fff;
+  padding: 12px 12px 20px;      
+  box-shadow: 0 8px 18px rgba(0,0,0,.12);
+  border-radius: 10px;
+  width: clamp(220px, 28vw, 300px); 
+  transform: rotate(var(--tilt, 0deg)) scale(.92);
+  opacity: 0;
+  transition: transform .7s ease, opacity .7s ease, box-shadow .3s ease;
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 3 / 4;          
+  object-fit: cover;              
+  display: block;
+  border-radius: 6px;
+}
+
+.polaroid .caption {
+  margin-top: .6rem;
+  font-weight: 700;
+  color: #3f2171;
+  font-size: .95rem;
+}
+
+.polaroid[data-tilt="left"]   { --tilt: -6deg; }
+.polaroid[data-tilt="center"] { --tilt:  3deg; }
+.polaroid[data-tilt="right"]  { --tilt: -2deg; }
+
+.polaroid.show {
+  opacity: 1;
+  transform: rotate(var(--tilt, 0deg)) scale(1);
+}
+
+@media (hover:hover) {
+  .polaroid:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,.18);
+    transform: rotate(var(--tilt, 0deg)) scale(1.02);
+  }
+}
+
+.adopt-msg {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 28px;
+  color: #3f2171;
+}
