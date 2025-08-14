@@ -44,10 +44,10 @@ input[type="date"] {
 
 .reservation-header {
   background: url('../images/paw-banner.png') center center no-repeat;
-  background-size: contain; /* Light pink/purple tone */
+  background-size: contain; 
   text-align: center;
   padding: 25px;
-  margin-top: 20px; /* top, sides, bottom */
+  margin-top: 20px;
   margin-bottom: 10px;
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
@@ -55,7 +55,7 @@ input[type="date"] {
 
 .reservation-title {
   font-size: 3.2rem;
-  color: #3f2171; /* Your dark purple */
+  color: #3f2171; 
   font-weight: normal;
   margin: 0;
   position: relative;

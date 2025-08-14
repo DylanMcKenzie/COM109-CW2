@@ -78,7 +78,7 @@
 
 .thankyou-modal .confetti-emoji {
   padding-top: 20px;;
-  font-size: 2rem;
+  font-size: var(--spacing-lg);
 }
 
 .thankyou-modal .thankyou-message {
