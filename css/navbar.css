@@ -39,7 +39,7 @@ align-items: center;
 
 .tagline {
   background-color: #ffe5fd;
-  color: #3f2171;
+  color: var(--color-primary);
   padding: 12px 20px;
   font-size: 3rem;
   font-weight: bold;
@@ -63,7 +63,7 @@ padding-bottom: 0;
 .nav-link {
 font-weight: normal;
 font-size: 1.5rem;
-color: #3f2171;
+color: var(--color-primary);
 text-decoration: none;
 padding: 12px 20px;
 border-top-left-radius: 12px;
