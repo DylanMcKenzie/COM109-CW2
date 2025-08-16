@@ -1,4 +1,4 @@
-.site-footer {
+.footer {
   background-color: #3f2171;
   color: #fff;
   padding: 40px 20px 20px;
@@ -53,7 +53,7 @@
 }
 
 @media (max-width: 768px) {
-  .site-footer {
+  .footer {
     padding: 28px 16px 16px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
