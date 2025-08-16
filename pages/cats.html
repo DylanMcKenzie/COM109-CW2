@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/cats.css" />
     <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/donate.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -167,9 +169,20 @@
         <h3>No cats found</h3>
         <p>Try adjusting your filters to see more results.</p>
     </div>
+    </div>
 
+    <div id="footer"></div>
     <script src="../libs/jquery/jquery-3.7.1.min.js"></script>
     <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
+    <script>
+      $('#navbar').load('../components/navbar/navbar.html', function(){
+        $.get('../components/modals/donate.html', function(html){
+          $('body').append(html); if (typeof initDonateModal==='function') initDonateModal();
+        });
+      });
+      $('#footer').load('../components/footer/footer.html');
+    </script>
+    <script src="../js/donate.js"></script>
     <script src="../js/cats.js"></script>
   </body>
 </html>

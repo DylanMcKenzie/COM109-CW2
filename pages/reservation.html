@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="../css/variables.css">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/reservation.css">
-  <link rel="stylesheet" href="../components/navbar/navbar.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/donate.css">
 </head>
 
 <body class="bg-light">
@@ -20,12 +22,6 @@
   <div class="reservation-header">
     <h1 class="reservation-title">Reservation</h1>
   </div>
-
-  <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
-
-  <script src="../libs/jquery/jquery-3.7.1.min.js"></script>
-
-  <script src="../js/reservation.js"></script>
 
   <div class="container py-5">
     <div class="row g-5">
@@ -114,7 +110,20 @@
     </div>
   </div>
 
+  <div id="footer"></div>
 
+  <script src="../libs/jquery/jquery-3.7.1.min.js"></script>
+  <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
+  <script>
+    $('#navbar').load('../components/navbar/navbar.html', function(){
+      $.get('../components/modals/donate.html', function(html){
+        $('body').append(html); if (typeof initDonateModal==='function') initDonateModal();
+      });
+    });
+    $('#footer').load('../components/footer/footer.html');
+  </script>
+  <script src="../js/donate.js"></script>
+  <script src="../js/reservation.js"></script>
 </body>
 
 </html>
