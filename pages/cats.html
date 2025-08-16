@@ -4,10 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Adopt a Cat</title>
-        <link
-            rel="shortcut icon"
-            type="image/jpg"
-            href="../images/cats/cat.jpg" />
+        <link rel="shortcut icon" type="image/jpg" href="../images/cats/cat.jpg" />
         <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="../css/variables.css" />
         <link rel="stylesheet" href="../css/styles.css" />
@@ -15,9 +12,7 @@
         <link rel="stylesheet" href="../css/navbar.css" />
         <link rel="stylesheet" href="../css/footer.css" />
         <link rel="stylesheet" href="../css/donate.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     </head>
 
     <body>
@@ -30,9 +25,7 @@
                     Adopt a Furry Friend Today
                 </h1>
                 <p class="page-subtitle">
-                    Discover loving cats waiting for their forever homes. Each
-                    of our cats have a unique personality and story. Use the
-                    filters below to find your purrfect match!
+                    Discover loving cats waiting for their forever homes. Each of our cats have a unique personality and story. Use the filters below to find your purrfect match!
                 </p>
             </div>
 
@@ -42,22 +35,16 @@
                 <div class="row">
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Breed</label>
-                        <select
-                            id="breed-filter"
-                            class="form-select filter-select">
+                        <select id="breed-filter" class="form-select filter-select">
                             <option value="">All Breeds</option>
                         </select>
                     </div>
 
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Age</label>
-                        <select
-                            id="age-filter"
-                            class="form-select filter-select">
+                        <select id="age-filter" class="form-select filter-select">
                             <option value="">All Ages</option>
-                            <option value="kitten">
-                                Kitten (Under 1 year)
-                            </option>
+                            <option value="kitten">Kitten (Under 1 year)</option>
                             <option value="young">Young (1-3 years)</option>
                             <option value="adult">Adult (3+ years)</option>
                         </select>
@@ -65,9 +52,7 @@
 
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Good with Children</label>
-                        <select
-                            id="children-filter"
-                            class="form-select filter-select">
+                        <select id="children-filter" class="form-select filter-select">
                             <option value="">All</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
@@ -76,9 +61,7 @@
 
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Good with Other Pets</label>
-                        <select
-                            id="pets-filter"
-                            class="form-select filter-select">
+                        <select id="pets-filter" class="form-select filter-select">
                             <option value="">All</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
@@ -89,9 +72,7 @@
                 <div class="row mt-3">
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Gender</label>
-                        <select
-                            id="gender-filter"
-                            class="form-select filter-select">
+                        <select id="gender-filter" class="form-select filter-select">
                             <option value="">All</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -100,27 +81,19 @@
 
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Location</label>
-                        <select
-                            id="location-filter"
-                            class="form-select filter-select">
+                        <select id="location-filter" class="form-select filter-select">
                             <option value="">All Locations</option>
                         </select>
                     </div>
 
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Search by Name</label>
-                        <input
-                            type="text"
-                            id="name-search"
-                            class="form-control filter-input"
-                            placeholder="Enter cat name..." />
+                        <input type="text" id="name-search" class="form-control filter-input" placeholder="Enter cat name..." />
                     </div>
 
                     <div class="col-md-3 filter-group">
                         <label class="filter-label">Favourites</label>
-                        <select
-                            id="favorites-filter"
-                            class="form-select filter-select">
+                        <select id="favorites-filter" class="form-select filter-select">
                             <option value="">All Cats</option>
                             <option value="favorites">My Favourites</option>
                         </select>
@@ -129,28 +102,19 @@
 
                 <div class="row mt-3">
                     <div class="col-12 text-end">
-                        <button id="reset-filters" class="reset-filters-btn">
-                            <i class="fas fa-undo"></i> Reset Filters
-                        </button>
+                        <button id="reset-filters" class="reset-filters-btn"><i class="fas fa-undo"></i> Reset Filters</button>
                     </div>
                 </div>
             </div>
 
-            <div
-                class="stats-section stats-compact"
-                aria-label="Cats statistics">
+            <div class="stats-section stats-compact" aria-label="Cats statistics">
                 <div class="stats-grid stats-compact-grid">
                     <div class="stat-item">
                         <div class="stat-icon" aria-hidden="true">
                             <i class="fas fa-paw"></i>
                         </div>
                         <div>
-                            <div
-                                class="stat-number"
-                                id="total-cats"
-                                aria-live="polite">
-                                0
-                            </div>
+                            <div class="stat-number" id="total-cats" aria-live="polite">0</div>
                             <div class="stat-label">Total Cats</div>
                         </div>
                     </div>
@@ -159,12 +123,7 @@
                             <i class="fas fa-heart"></i>
                         </div>
                         <div>
-                            <div
-                                class="stat-number"
-                                id="total-likes"
-                                aria-live="polite">
-                                0
-                            </div>
+                            <div class="stat-number" id="total-likes" aria-live="polite">0</div>
                             <div class="stat-label">Hearts Given</div>
                         </div>
                     </div>
@@ -173,12 +132,7 @@
                             <i class="fas fa-eye"></i>
                         </div>
                         <div>
-                            <div
-                                class="stat-number"
-                                id="filtered-cats"
-                                aria-live="polite">
-                                0
-                            </div>
+                            <div class="stat-number" id="filtered-cats" aria-live="polite">0</div>
                             <div class="stat-label">Showing Now</div>
                         </div>
                     </div>
@@ -206,8 +160,7 @@
             $("#navbar").load("../components/navbar/navbar.html", function () {
                 $.get("../components/modals/donate.html", function (html) {
                     $("body").append(html);
-                    if (typeof initDonateModal === "function")
-                        initDonateModal();
+                    if (typeof initDonateModal === "function") initDonateModal();
                 });
             });
             $("#footer").load("../components/footer/footer.html");

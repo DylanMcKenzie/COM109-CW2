@@ -28,18 +28,12 @@ $(document).ready(function () {
     function populateFilters() {
         const breeds = [...new Set(allCats.map((cat) => cat.breed))].sort();
         breeds.forEach((breed) => {
-            $("#breed-filter").append(
-                `<option value="${breed}">${breed}</option>`
-            );
+            $("#breed-filter").append(`<option value="${breed}">${breed}</option>`);
         });
 
-        const locations = [
-            ...new Set(allCats.map((cat) => cat.location)),
-        ].sort();
+        const locations = [...new Set(allCats.map((cat) => cat.location))].sort();
         locations.forEach((location) => {
-            $("#location-filter").append(
-                `<option value="${location}">${location}</option>`
-            );
+            $("#location-filter").append(`<option value="${location}">${location}</option>`);
         });
     }
 
@@ -70,9 +64,7 @@ $(document).ready(function () {
       <div class="cat-card" data-cat-id="${cat.id}">
         <div class="cat-image-container">
           <img src="${cat.image}" alt="${cat.name}" class="cat-image">
-          <button class="like-btn ${
-              isLiked ? "liked" : ""
-          }" data-cat-id="${cat.id}">
+          <button class="like-btn ${isLiked ? "liked" : ""}" data-cat-id="${cat.id}">
             <i class="fas fa-heart"></i>
           </button>
         </div>
@@ -84,15 +76,11 @@ $(document).ready(function () {
           <div class="cat-details">
             <span><i class="fas fa-venus-mars"></i> ${cat.gender}</span>
             <span><i class="fas fa-birthday-cake"></i> ${cat.age}</span>
-            <span><i class="fas fa-map-marker-alt"></i> ${
-                cat.location.split(" ")[0]
-            }</span>
+            <span><i class="fas fa-map-marker-alt"></i> ${cat.location.split(" ")[0]}</span>
           </div>
           
           <div class="cat-traits">
-            ${traits
-                .map((trait) => `<span class="trait-badge">${trait}</span>`)
-                .join("")}
+            ${traits.map((trait) => `<span class="trait-badge">${trait}</span>`).join("")}
           </div>
           
           <p class="cat-about">${cat.about}</p>
@@ -109,8 +97,7 @@ $(document).ready(function () {
         const traits = [];
         if (cat.goodWithChildren) traits.push("Kid-friendly");
         if (cat.goodWithOtherPets) traits.push("Pet-friendly");
-        if (!cat.goodWithChildren && !cat.goodWithOtherPets)
-            traits.push("Prefers adults");
+        if (!cat.goodWithChildren && !cat.goodWithOtherPets) traits.push("Prefers adults");
         return traits;
     }
 
@@ -131,31 +118,19 @@ $(document).ready(function () {
         const favoritesFilter = $("#favorites-filter").val();
 
         filteredCats = allCats.filter((cat) => {
-            if (nameSearch && !cat.name.toLowerCase().includes(nameSearch))
-                return false;
+            if (nameSearch && !cat.name.toLowerCase().includes(nameSearch)) return false;
             if (breedFilter && cat.breed !== breedFilter) return false;
             if (ageFilter) {
                 const ageNum = parseInt(cat.age);
-                if (
-                    ageFilter === "kitten" &&
-                    !(cat.age.includes("month") || ageNum < 1)
-                )
-                    return false;
-                if (ageFilter === "young" && !(ageNum >= 1 && ageNum <= 3))
-                    return false;
+                if (ageFilter === "kitten" && !(cat.age.includes("month") || ageNum < 1)) return false;
+                if (ageFilter === "young" && !(ageNum >= 1 && ageNum <= 3)) return false;
                 if (ageFilter === "adult" && ageNum < 4) return false;
             }
-            if (
-                childrenFilter &&
-                cat.goodWithChildren.toString() !== childrenFilter
-            )
-                return false;
-            if (petsFilter && cat.goodWithOtherPets.toString() !== petsFilter)
-                return false;
+            if (childrenFilter && cat.goodWithChildren.toString() !== childrenFilter) return false;
+            if (petsFilter && cat.goodWithOtherPets.toString() !== petsFilter) return false;
             if (genderFilter && cat.gender !== genderFilter) return false;
             if (locationFilter && cat.location !== locationFilter) return false;
-            if (favoritesFilter === "favorites" && !likedCats.includes(cat.id))
-                return false;
+            if (favoritesFilter === "favorites" && !likedCats.includes(cat.id)) return false;
 
             return true;
         });
@@ -164,8 +139,7 @@ $(document).ready(function () {
         updateStats();
     }
 
-    const filterSelectors =
-        "#breed-filter, #age-filter, #children-filter, #pets-filter, #gender-filter, #location-filter, #favorites-filter";
+    const filterSelectors = "#breed-filter, #age-filter, #children-filter, #pets-filter, #gender-filter, #location-filter, #favorites-filter";
 
     $(filterSelectors).on("change", applyFilters);
     $("#name-search").on("input", applyFilters);
