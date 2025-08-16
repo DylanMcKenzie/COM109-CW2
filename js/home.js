@@ -1,102 +1,113 @@
 // Component loaders
 
-function loadInto(selector, url) {
+function loadComponent(url, selector, callback) {
   return fetch(url)
-    .then(r => r.text())
+    .then(response => response.text())
     .then(html => {
-      const el = document.querySelector(selector);
-      if (el) el.innerHTML = html;
-    });
-}
-
-function appendToBody(url) {
-  return fetch(url)
-    .then(r => r.text())
-    .then(html => {
-      document.body.insertAdjacentHTML('beforeend', html);
+      if (selector) {
+        const element = document.querySelector(selector);
+        if (element) element.innerHTML = html;
+      } else {
+        document.body.insertAdjacentHTML('beforeend', html);
+      }
+      if (typeof callback === 'function') callback();
     });
 }
 
 Promise.all([
-  loadInto('#navbar',  'components/navbar/navbar.html'),
-  loadInto('#footer',  'components/footer/footer.html'),
-  loadInto('#home-page', 'pages/home.html').then(() => {
+  loadComponent('components/navbar/navbar.html', '#navbar'),
+  loadComponent('components/footer/footer.html', '#footer'),
+  loadComponent('pages/home.html', '#home-page', () => {
     initSlider();
     initStepsReveal();
     initLostPetsReveal();
   }),
-  appendToBody('components/modals/donate.html').then(() => {
-    initDonateModal();
-  }),
-]).catch(err => console.error('❌ Component load error:', err));
+  loadComponent('components/modals/donate.html', null)
+  .then(() => initDonateModal()),
+]).catch(err => console.error('Component load error:', err));
 
 
-// Hero Slider
+// Pet Slider
 
 function initSlider() {
-  const slider = document.querySelector('.hero-slider');
+  const slider = document.querySelector('.pet-slider');
   if (!slider) return;
 
-  const slides = slider.querySelectorAll('.hero-slider__image');
-  const dotsContainer = slider.querySelector('.hero-slider__dots');
+  const slides = slider.querySelectorAll('.pet-slider-photo');
+  const dotsContainer = slider.querySelector('.pet-slider-dots');
   if (!slides.length || !dotsContainer) return;
 
-  let current = 0;
-  let intervalId;
+  let currentIndex = 0;
+  let autoSlideTimer;
 
   dotsContainer.innerHTML = '';
-  slides.forEach((_, i) => {
+  slides.forEach((_, index) => {
     const dot = document.createElement('div');
-    dot.className = 'hero-slider__dot' + (i === 0 ? ' active' : '');
+    dot.className = 'pet-slider-dot' + (index === 0 ? ' active' : '');
     dot.addEventListener('click', () => {
-      goTo(i);
-      restart();
+      goToSlide(index);
+      restartAutoSlide();
     });
     dotsContainer.appendChild(dot);
   });
-  const dots = dotsContainer.querySelectorAll('.hero-slider__dot');
 
-  function goTo(i) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = i;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
+  const dots = dotsContainer.querySelectorAll('.pet-slider-dot');
+
+  function goToSlide(index) {
+    slides[currentIndex].classList.remove('active');
+    dots[currentIndex].classList.remove('active');
+
+    currentIndex = index;
+
+    slides[currentIndex].classList.add('active');
+    dots[currentIndex].classList.add('active');
   }
 
-  function next() {
-    goTo((current + 1) % slides.length);
+  function goToNextSlide() {
+    const nextIndex = (currentIndex + 1) % slides.length;
+    goToSlide(nextIndex);
   }
 
-  function restart() {
-    clearInterval(intervalId);
-    intervalId = setInterval(next, 5000);
+  function startAutoSlide() {
+    autoSlideTimer = setInterval(goToNextSlide, 5000);
   }
 
-  intervalId = setInterval(next, 5000);
+  function restartAutoSlide() {
+    clearInterval(autoSlideTimer);
+    startAutoSlide();
+  }
 
-  window.addEventListener('beforeunload', () => clearInterval(intervalId));
+  startAutoSlide();
+
+  window.addEventListener('beforeunload', () => clearInterval(autoSlideTimer));
 }
 
 
 // Adoption Steps
 
 function initStepsReveal() {
-  const items = document.querySelectorAll('.step-box, .polaroid'); 
-  if (!items.length) return;
+  const revealSteps = document.querySelectorAll('.steps-box, .polaroid'); 
+  if (!revealSteps.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     let delay = 0;
-    entries
-      .filter(e => e.isIntersecting)
-      .forEach(entry => {
-        setTimeout(() => entry.target.classList.add('show'), delay);
-        delay += 250;
-        observer.unobserve(entry.target);
-      });
-  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
 
-  items.forEach(el => observer.observe(el));
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('show');
+        }, delay);
+
+        delay += 250;
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, { 
+    threshold: 0.15,        
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  revealSteps.forEach(item => observer.observe(item));
 }
 
 
@@ -106,212 +117,227 @@ function initDonateModal() {
   const $form = $('#donor-details-form');
   if (!$form.length) return;
 
-  // Sort code mask: 112233 -> 11-22-33
-  const $sort = $form.find('#sortCode');
-  const formatSort = (raw) => {
-    const digits = String(raw || '').replace(/\D/g, '').slice(0, 6);
-    return digits.replace(/(\d{2})(?=\d)/g, '$1-');
+  const setValidity = ($input, message) => {
+    const input = $input[0];
+    input.setCustomValidity(message);
+    input.reportValidity();
+    input.setCustomValidity('');
   };
-  $sort.on('input blur', function () { this.value = formatSort(this.value); })
-       .on('paste', function () { setTimeout(() => { this.value = formatSort(this.value); }, 0); });
 
-  // Account number: digits only, max 8
-  const $acc = $form.find('#accNumber');
-  $acc.on('input', function () {
-    this.value = this.value.replace(/\D/g, '').slice(0, 8);
+  const digitsOnly = (value) => String(value || '').replace(/\D/g, '');
+
+  const formatSortCode = (rawValue) =>
+    digitsOnly(rawValue).slice(0, 6).replace(/(\d{2})(?=\d)/g, '$1-');
+
+  const $sortCodeInput = $form.find('#sortCode');
+  const $accountNumberInput = $form.find('#accNumber');
+  const $accountNameInput = $form.find('[name="accName"]');
+  const $firstNameInput = $form.find('[name="firstName"]');
+  const $lastNameInput = $form.find('[name="lastName"]');
+  const $phoneInput = $form.find('[name="phone"]');
+  const $donationAmountInput = $form.find('#donationAmount');
+  const $emailInput = $form.find('[name="email"]');
+
+  // Masks
+
+  $sortCodeInput
+    .on('input blur', function () {
+      this.value = formatSortCode(this.value);
+    })
+    .on('paste', function () {
+      setTimeout(() => { this.value = formatSortCode(this.value); }, 0);
+    });
+
+  $accountNumberInput.on('input', function () {
+    this.value = digitsOnly(this.value).slice(0, 8);
   });
 
-  // Names: letters/spaces/hyphen/apostrophe
-  const nameFilter = function () { this.value = this.value.replace(/[^A-Za-z\s'-]/g, ''); };
-  const $accName = $form.find('[name="accName"]').on('input', nameFilter);
-  const $first   = $form.find('[name="firstName"]').on('input', nameFilter);
-  const $last    = $form.find('[name="lastName"]').on('input', nameFilter);
+  const filterNameInput = function () {
+    this.value = String(this.value || '').replace(/[^-\p{L}\s']/gu, '');
+  };
+  $accountNameInput.on('input', filterNameInput);
+  $firstNameInput.on('input', filterNameInput);
+  $lastNameInput.on('input', filterNameInput);
 
-  // Phone : digits only, max 11 while typing
-  const $phone = $form.find('[name="phone"]');
-  $phone.on('input', function () {
-    this.value = this.value.replace(/\D/g, '').slice(0, 11);
+  $phoneInput.on('input', function () {
+    this.value = digitsOnly(this.value).slice(0, 11);
   });
 
-  // Donation Amount: digits + one dot, up to 2 decimals
-  const $amount = $form.find('#donationAmount');
-  $amount.on('input', function () {
-    let v = String(this.value || '').replace(/[^\d.]/g, '');
-    v = v.replace(/(\..*)\./g, '$1'); // keep only first dot
-    if (v.includes('.')) {
-      const [int, dec = ''] = v.split('.');
-      v = int.replace(/^0+(?=\d)/, '') + '.' + dec.slice(0, 2);
+  $donationAmountInput.on('input', function () {
+    let value = String(this.value || '').replace(/[^\d.]/g, '');
+    value = value.replace(/(\..*)\./g, '$1'); // keep only one dot
+    if (value.includes('.')) {
+      const [integerPart, decimalPart = ''] = value.split('.');
+      value = integerPart.replace(/^0+(?=\d)/, '') + '.' + decimalPart.slice(0, 2);
     } else {
-      v = v.replace(/^0+(?=\d)/, '');
+      value = value.replace(/^0+(?=\d)/, '');
     }
-    this.value = v;
+    this.value = value;
   });
 
   // Submit
-  $form.on('submit', function (e) {
-    e.preventDefault();
 
-    const showMsg = ($el, msg) => {
-      const el = $el[0];
-      el.setCustomValidity(msg);
-      el.reportValidity();
-      el.setCustomValidity('');
-    };
+  $form.on('submit', function (event) {
+    event.preventDefault();
+
+    const firstName = ($firstNameInput.val() || '').trim();
+    const lastName = ($lastNameInput.val() || '').trim();
+    const accountName = ($accountNameInput.val() || '').trim();
+    const accountNum = ($accountNumberInput.val() || '').trim();
+    const sortCode = ($sortCodeInput.val() || '').trim();
+    const phoneNumber = ($phoneInput.val() || '').trim();
+    const emailEl = $emailInput[0];
+
+    // Validation rules
+
+    const nameRegex = /^[-\p{L}\s']+$/u;
+    const sortRegex = /^\d{2}-\d{2}-\d{2}$/;
+    const accountRegex = /^\d{8}$/;
+    const phoneRegex = /^07\d{9}$/; 
 
     // Names
-    const nameRe = /^[A-Za-z\s'-]+$/;
-    const firstVal = ($first.val() || '').trim();
-    if (!nameRe.test(firstVal)) return showMsg($first, 'First name can only contain letters, spaces, hyphens, or apostrophes');
-    const lastVal = ($last.val() || '').trim();
-    if (!nameRe.test(lastVal))  return showMsg($last,  'Last name can only contain letters, spaces, hyphens, or apostrophes');
 
-    // Email 
-    const emailEl = $form.find('[name="email"]')[0];
+    if (!nameRegex.test(firstName)) {
+      return setValidity($firstNameInput, 'First name can only contain letters, spaces, hyphens, or apostrophes');
+    }
+    if (!nameRegex.test(lastName)) {
+      return setValidity($lastNameInput, 'Last name can only contain letters, spaces, hyphens, or apostrophes');
+    }
+    if (!nameRegex.test(accountName)) {
+      return setValidity($accountNameInput, 'Account holder name can only contain letters, spaces, hyphens, or apostrophes');
+    }
+
+    // Email
+
     if (!emailEl.checkValidity()) {
-      emailEl.setCustomValidity('Please enter a valid email address');
-      emailEl.reportValidity();
-      emailEl.setCustomValidity('');
-      return;
+      return setValidity($emailInput, 'Please enter a valid email address');
     }
 
-    // Phone
-    const phoneVal = ($phone.val() || '').trim();
-    if (phoneVal && !/^07\d{9}$/.test(phoneVal)) {
-      return showMsg($phone, 'Phone must start with 07 and be 11 digits long (e.g., 07XXXXXXXXX)');
-    }
+    // Phone 
 
-    // Account holder
-    const accNameVal = ($accName.val() || '').trim();
-    if (!nameRe.test(accNameVal)) {
-      return showMsg($accName, 'Account holder name can only contain letters, spaces, hyphens, or apostrophes');
+    if (phoneNumber && !phoneRegex.test(phoneNumber)) {
+      return setValidity($phoneInput, 'Phone must start with 07 and be 11 digits long (e.g. 07XXXXXXXXX)');
     }
 
     // Account number
-    const accVal = ($acc.val() || '').trim();
-    if (!/^\d{8}$/.test(accVal)) {
-      return showMsg($acc, 'Please enter exactly 8 digits for the account number');
+
+    if (!accountRegex.test(accountNum)) {
+      return setValidity($accountNumberInput, 'Please enter exactly 8 digits for the account number');
     }
 
     // Sort code
-    const sortVal = ($sort.val() || '').trim();
-    if (!/^\d{2}-\d{2}-\d{2}$/.test(sortVal)) {
-      return showMsg($sort, 'Please enter a sort code in the format 00-00-00');
+
+    if (!sortRegex.test(sortCode)) {
+      return setValidity($sortCodeInput, 'Please enter a sort code in the format 00-00-00');
     }
 
-    // Donation Amount
-    const rawAmt = String($amount.val() || '').trim();
+    // Amount
 
-    // 6 digits and decimals to 2
-    let cleaned = rawAmt.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1');
-    if (cleaned.includes('.')) {
-      const [intPart, decPart = ''] = cleaned.split('.');
-      cleaned = intPart.slice(0, 6) + '.' + decPart.slice(0, 2);
+    let normalisedAmount = String($donationAmountInput.val() || '')
+      .trim()
+      .replace(/[^\d.]/g, '')
+      .replace(/(\..*)\./g, '$1');
+
+    if (normalisedAmount.includes('.')) {
+      const [intPart, decPart = ''] = normalisedAmount.split('.');
+      normalisedAmount = intPart.slice(0, 6) + '.' + decPart.slice(0, 2);
     } else {
-      cleaned = cleaned.slice(0, 6);
+      normalisedAmount = normalisedAmount.slice(0, 6);
     }
 
-    let amtNum = parseFloat(cleaned);
-
-    // invalid/zero/negative validation
-    if (!cleaned || isNaN(amtNum) || amtNum <= 0) {
-      return showMsg($amount, 'Please enter a valid amount (e.g., 5 or 12.50)');
+    let amountNumber = parseFloat(normalisedAmount);
+    if (!Number.isFinite(amountNumber) || amountNumber <= 0) {
+      return setValidity($donationAmountInput, 'Please enter a valid amount (e.g. 5 or 12.50)');
     }
+    if (amountNumber > 999999) amountNumber = 999999;
+    const amountFormatted = amountNumber.toFixed(2);
 
-    // max £999,999.99 and fix to 2dp
-    if (amtNum > 999999) amtNum = 999999;
-    const amountStr = amtNum.toFixed(2);
-
-    const formEl = $form[0];
-    if (!formEl.checkValidity()) {
-      formEl.reportValidity();
+    const formElement = $form[0];
+    if (!formElement.checkValidity()) {
+      formElement.reportValidity();
       return;
     }
 
     // Success
-    const donateEl = document.getElementById('donateModal');
-    const donateModal = bootstrap.Modal.getInstance(donateEl) || new bootstrap.Modal(donateEl);
+
+    const donateModalEl = document.getElementById('donateModal');
+    const donateModal   = bootstrap.Modal.getInstance(donateModalEl) || new bootstrap.Modal(donateModalEl);
     donateModal.hide();
 
-    donateEl.addEventListener('hidden.bs.modal', function onHidden() {
-      donateEl.removeEventListener('hidden.bs.modal', onHidden);
+    $(donateModalEl).one('hidden.bs.modal', function () {
+      const $thankYouModal = $('#thankYouModal');
+      $thankYouModal.find('#tyName').text(firstName || 'Friend');
+      $thankYouModal.find('#tyAmount').text(amountFormatted);
 
-      const firstName = (firstVal || 'Friend').trim(); 
+      const thankYouModal = new bootstrap.Modal($thankYouModal[0], { backdrop: 'static' });
+      thankYouModal.show();
 
-      const tyEl = document.getElementById('thankYouModal');
-      const nameSpan   = tyEl.querySelector('#tyName');
-      const amountSpan = tyEl.querySelector('#tyAmount');
-
-      if (nameSpan) {
-        nameSpan.textContent = firstName;
-      }
-      if (amountSpan) {
-        amountSpan.textContent = amountStr;
-      }
-
-      const tyModal = new bootstrap.Modal(tyEl, { backdrop: 'static' });
-      tyModal.show();
-
-      tyEl.addEventListener('shown.bs.modal', function once() {
-        tyEl.removeEventListener('shown.bs.modal', once);
+      $thankYouModal.one('shown.bs.modal', function () {
         fireConfetti(1200);
-      }, { once: true });
-    }, { once: true });
+      });
+    });
 
-    formEl.reset();
+    $form[0].reset();
   });
 }
 
 
-// Confetti
+// Pink Confetti !!! :)
 
 function fireConfetti(duration = 1000) {
   const canvas = document.createElement('canvas');
-  canvas.style.position = 'fixed';
-  canvas.style.inset = '0';
-  canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '2000';
+  Object.assign(canvas.style, {
+    position: 'fixed',
+    inset: '0',
+    pointerEvents: 'none',
+    zIndex: '2000'
+  });
   document.body.appendChild(canvas);
 
   const dpr = window.devicePixelRatio || 1;
   canvas.style.width = '100vw';
   canvas.style.height = '100vh';
-  canvas.width  = Math.floor(window.innerWidth  * dpr);
-  canvas.height = Math.floor(window.innerHeight * dpr);
+  canvas.width  = window.innerWidth  * dpr;
+  canvas.height = window.innerHeight * dpr;
 
   const ctx = canvas.getContext('2d');
   ctx.scale(dpr, dpr);
 
-  const particles = Array.from({ length: 160 }).map(() => ({
+  const colors = ['#ff70c0', '#cba6ea', '#ffe5fd', '#3f2171', '#ffcfef'];
+  const particles = Array.from({ length: 160 }, () => ({
     x: Math.random() * window.innerWidth,
     y: -20,
-    vx: (Math.random() - 0.5) * 4,
-    vy: Math.random() * 3 + 2.5,
-    r: Math.random() * 5 + 2,
-    a: Math.random() * 2 * Math.PI,
-    spin: (Math.random() - 0.5) * 0.2
+    vx: (Math.random() - 0.5) * 4,       
+    vy: Math.random() * 3 + 2.5,       
+    size: Math.random() * 5 + 2,          
+    angle: Math.random() * Math.PI * 2,  
+    spin: (Math.random() - 0.5) * 0.2   
   }));
-  const colors = ['#ff70c0', '#cba6ea', '#ffe5fd', '#3f2171', '#ffcfef'];
 
-  const start = performance.now();
-  function frame(t) {
-    const elapsed = t - start;
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  const startTime = performance.now();
 
-    particles.forEach(p => {
+  function drawFrame(now) {
+    const elapsed = now - startTime;
+    ctx.clear(0, 0, window.innerWidth, window.innerHeight);
+
+    for (const p of particles) {
       p.x += p.vx;
       p.y += p.vy;
-      p.a += p.spin;
+      p.angle += p.spin;
 
       ctx.save();
       ctx.translate(p.x, p.y);
-      ctx.rotate(p.a);
-      ctx.fillStyle = colors[(Math.abs((p.x + p.y) | 0)) % colors.length];
-      ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
       ctx.restore();
-    });
+    }
 
-    if (elapsed < duration) requestAnimationFrame(frame);
-    else canvas.remove();
+    if (elapsed < duration) {
+      requestAnimationFrame(drawFrame);
+    } else {
+      canvas.remove();
+    }
   }
-  requestAnimationFrame(frame);
+  requestAnimationFrame(drawFrame);
 }
