@@ -23,6 +23,8 @@
   <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
   <script>
     $('#navbar').load('../components/navbar/navbar.html', function(){
+      $('.nav-link').removeClass('active');
+      $(".nav-link[href='../pages/dogs.html']").addClass('active');
       $.get('../components/modals/donate.html', function(html){
         $('body').append(html); if (typeof initDonateModal==='function') initDonateModal();
       });
