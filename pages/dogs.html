@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adopt a Dog</title>
+   <link rel="shortcut icon" type="image/jpg" href="../images/cats/cat.jpg" />
+  <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/donate.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+  <main class="container py-5">
+    <h1 class="page-title"><i class="fas fa-dog"></i> Adopt a Loyal Companion</h1>
+    <p class="page-subtitle">Dog listings coming soon.</p>
+  </main>
+  <div id="footer"></div>
+  <script src="../libs/jquery/jquery-3.7.1.min.js"></script>
+  <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
+  <script>
+    $('#navbar').load('../components/navbar/navbar.html', function(){
+      $('.nav-link').removeClass('active');
+      $(".nav-link[href='../pages/dogs.html']").addClass('active');
+      $.get('../components/modals/donate.html', function(html){
+        $('body').append(html); if (typeof initDonateModal==='function') initDonateModal();
+      });
+    });
+    $('#footer').load('../components/footer/footer.html');
+  </script>
+  <script src="../js/donate.js"></script>
+</body>
+</html>
