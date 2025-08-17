@@ -4,7 +4,6 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Adopt a Dog</title>
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="../css/styles.css" />
         <link rel="stylesheet" href="../css/dogs.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -40,6 +39,8 @@
         <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
         <script>
             $("#navbar").load("../components/navbar/navbar.html", function () {
+                $(".nav-link").removeClass("active");
+                $(".nav-link[href='../pages/dogs.html']").addClass("active");
                 $.get("../components/modals/donate.html", function (html) {
                     $("body").append(html);
                     if (typeof initDonateModal === "function") initDonateModal();
