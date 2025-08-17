@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservation Confirmation</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/confirmation.css" />
+  <link rel="stylesheet" href="../components/navbar/navbar.css" />
+</head>
+
+<body>
+  <div id="navbar"></div>
+<main class="confirmation-wrapper">
+  <div class="container py-5">
+    <h1 class="mb-4">Reservation Confirmed 🎉</h1>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <img id="confirm-pet-img" class="img-fluid rounded border shadow" alt="Pet Image" />
+        <h3 id="confirm-pet-name" class="mt-3"></h3>
+        <p><strong>Breed:</strong><br> <span id="confirm-pet-breed"></span></p>
+        <p><strong>Gender:</strong><br> <span id="confirm-pet-gender"></span></p>
+        <p><strong>Age:</strong><br> <span id="confirm-pet-age"></span></p>
+        <p><strong>Location:</strong><br> <span id="confirm-pet-location"></span></p>
+      </div>
+
+      <div class="col-md-8">
+        <h2 id="your-details">Your Details</h2>
+        <p><strong>Name:</strong><br> <span id="confirm-user-name"></span></p>
+        <p><strong>Email:</strong><br> <span id="confirm-user-email"></span></p>
+        <p><strong>Address:</strong><br> <span id="confirm-user-address"></span></p>
+        <p><strong>Phone:</strong><br> <span id="confirm-user-number"></span></p>
+        <p><strong>Preferred Visit Date:</strong> <span id="confirm-user-date"></span></p>
+      </div>
+    </div>
+  </div>
+</main>
+  <script src="../libs/jquery/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#navbar').load('../components/navbar/navbar.html', function () {
+        $('.nav-link').removeClass('active');
+      });
+
+      const data = JSON.parse(localStorage.getItem("reservation"));
+      if (!data) {
+        $("body").html("<h2>Oops! No reservation data found.</h2>");
+        return;
+      }
+
+      // Pet
+      $("#confirm-pet-img").attr("src", data.pet.image);
+      $("#confirm-pet-name").text(data.pet.name);
+      $("#confirm-pet-breed").text(data.pet.breed);
+      $("#confirm-pet-gender").text(data.pet.gender);
+      $("#confirm-pet-age").text(data.pet.age);
+      $("#confirm-pet-location").text(data.pet.location);
+
+      // User
+      const fullName = `${data.user.title} ${data.user.firstName} ${data.user.lastName}`;
+      $("#confirm-user-name").text(fullName);
+      $("#confirm-user-email").text(data.user.email);
+      $("#confirm-user-address").text(`${data.user.address}, ${data.user.town}, ${data.user.postcode}`);
+      $("#confirm-user-number").text(data.user.number);
+      $("#confirm-user-date").text(data.user.visitDate);
+    });
+  </script>
+</body>
+
+</html>
