@@ -1,10 +1,10 @@
 
-body {
+.confirmation-page body {
   margin: 0;
   background-color: #fff0f6;
 }
 
-.confirmation-wrapper {
+.confirmation-page .confirmation-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ body {
 }
 
 
-.container {
+.confirmation-page .container {
   max-width: 900px;
   margin: auto;
   background-color: #fff5fa;
@@ -23,7 +23,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.confirmation-page h1 {
   color: #c36ac1;
   text-align: center;
   font-size: 2.5rem;
@@ -31,23 +31,23 @@ h1 {
   margin-top: 0px;
 }
 
-h2 {
+.confirmation-page h2 {
   color: #8a3d89;
   margin-bottom: 20px;
   font-size: 1.8rem;
 }
 
-p {
+.confirmation-page p {
   font-size: 1rem;
   color: #333;
   margin-bottom: 8px;
 }
 
-strong {
+.confirmation-page strong {
   color: #7c3e75;
 }
 
-img#confirm-pet-img {
+.confirmation-page img#confirm-pet-img {
   border: 6px dashed #ffc2ef;
   border-radius: 20px;
   padding: 10px;
