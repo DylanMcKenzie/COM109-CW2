@@ -30,7 +30,7 @@ $(document).ready(function () {
             return;
         }
 
-    const selectedPet = JSON.parse(localStorage.getItem("selectedDog")) || JSON.parse(localStorage.getItem("selectedCat"));
+        const selectedPet = JSON.parse(localStorage.getItem("selectedDog")) || JSON.parse(localStorage.getItem("selectedCat"));
 
         const reservationData = {
             pet: {

@@ -152,8 +152,7 @@ $(document).ready(function () {
         updateStats();
     });
 
-    $(document).on("click", ".like-btn", function (e) {
-        e.stopPropagation();
+    $(document).on("click", ".like-btn", function () {
         const catId = $(this).data("cat-id");
         const isLiked = likedCats.includes(catId);
 
@@ -169,13 +168,12 @@ $(document).ready(function () {
         updateStats();
     });
 
-    $(document).on("click", ".adopt-btn", function (e) {
-        e.stopPropagation();
+    $(document).on("click", ".adopt-btn", function () {
         const catId = $(this).data("cat-id");
         const cat = allCats.find((c) => c.id === catId);
 
         if (cat) {
-            localStorage.removeItem('selectedDog');
+            localStorage.removeItem("selectedDog");
             localStorage.setItem("selectedCat", JSON.stringify(cat));
             window.location.href = "reservation.html";
         }

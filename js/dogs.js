@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $.getJSON("../data/pets.json", function (data) {
-        const dogs = data.filter(animal => animal.type === "dog");
+        const dogs = data.filter((animal) => animal.type === "dog");
         const $list = $(".dog-list").empty();
 
-        dogs.forEach(dog => {
+        dogs.forEach((dog) => {
             const reserved = !!dog.reserved;
 
             const card = $(`
@@ -45,14 +45,14 @@ $(document).ready(function () {
                 console.error("No pet ID on button");
                 return;
             }
-            const dog = dogs.find(d => String(d.id) === String(petId));
+            const dog = dogs.find((d) => String(d.id) === String(petId));
             if (dog) {
-                localStorage.removeItem('selectedCat');
-                localStorage.setItem('selectedDog', JSON.stringify(dog));
+                localStorage.removeItem("selectedCat");
+                localStorage.setItem("selectedDog", JSON.stringify(dog));
                 window.location.href = "reservation.html";
             }
         });
     }).fail(function () {
-        console.error("Could not load dogs JSON file.");
+        console.error("Could not load dogs. Please retry.");
     });
 });
