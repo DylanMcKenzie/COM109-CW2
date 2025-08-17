@@ -1,37 +1,12 @@
-$(function() {
-  $('#filterReserved').on('change', function() {
-    if ($(this).is(':checked')) {
-      // Show only dogs with data-reserved="true"
-      $('.dog-card').each(function() {
-        if ($(this).attr('data-reserved') === "true") {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
-    } else {
-      // Show all dogs
-      $('.dog-card').show();
-    }
-  });
-
-  // Keep your adopt button logic if you want
-  $('.adopt-btn').not('[disabled]').on('click', function() {
-    const dogName = $(this).siblings('h2').text();
-    localStorage.setItem('selectedDog', dogName);
-    window.location.href = 'reservation.html';
-  });
-});
-
 $(document).ready(function () {
     $.getJSON("../data/pets.json", function (data) {
-        let dogs = data.filter(animal => animal.type === "dog");
-        let $list = $(".dog-list").empty();
+        const dogs = data.filter(animal => animal.type === "dog");
+        const $list = $(".dog-list").empty();
 
         dogs.forEach(dog => {
-            let reserved = dog.reserved || false;
+            const reserved = !!dog.reserved;
 
-            let card = $(`
+            const card = $(`
                 <article class="dog-card" data-reserved="${reserved}">
                     <img src="${dog.image}" alt="${dog.name} the ${dog.breed}" />
                     <h2>${dog.name}</h2>
@@ -40,8 +15,13 @@ $(document).ready(function () {
                         <div class="info-item">${dog.age}</div>
                         <div class="info-item">${dog.location}</div>
                     </div>
-                    <p class="short-desc">${dog.shortDescription}</p>
-                    <button class="adopt-btn"${reserved ? " disabled" : ""}>
+                    <p class="short-desc">${dog.shortDescription || ""}</p>
+                    <button 
+                        type="button"
+                        class="adopt-btn ${reserved ? "reserved-btn" : ""}"
+                        data-pet-id="${dog.id}" 
+                        ${reserved ? "disabled" : ""}
+                    >
                         ${reserved ? "Reserved" : "Adopt Me"}
                     </button>
                 </article>
@@ -57,9 +37,17 @@ $(document).ready(function () {
                 $(".dog-card").show();
             }
         });
+
+        $(document).on("click", ".adopt-btn:not([disabled])", function (e) {
+            e.preventDefault();
+            const petId = $(this).data("pet-id");
+            if (!petId) {
+                console.error("No pet ID on button");
+                return;
+            }
+            window.location.href = `reservation.html?id=${encodeURIComponent(petId)}`;
+        });
     }).fail(function () {
         console.error("Could not load dogs JSON file.");
     });
 });
-
-

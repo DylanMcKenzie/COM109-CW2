@@ -25,7 +25,8 @@
     "location": "Manchester Rescue",
     "about": "Max is a big, goofy sweetheart who lights up every room he enters. He’s incredibly friendly and loves everyone he meets — human or animal. Long walks and tug-of-war games are his favourite activities, followed by long naps in the sun. Max has been through basic obedience training and loves learning new tricks. He’d be a perfect addition to an active family looking for a lovable sidekick.",
     "shortDescription": "Friendly, playful Labrador who enjoys walks, games, and sunny naps.",
-    "image": "../images/dogs/max.webp"
+    "image": "../images/dogs/max.webp",
+     "reserved": true
   },
   {
     "id": "dog003",
@@ -81,7 +82,8 @@
     "location": "Sheffield Pet Haven",
     "about": "Charlie is an affectionate and intelligent Cocker Spaniel who loves to be part of the family. He bonds closely with his humans and enjoys cuddling as much as playtime. Charlie prefers to be the only pet, as he likes having all the attention. He’s very food-motivated and learns quickly with positive reinforcement. If you’re looking for a clever dog who loves love, Charlie is for you.",
     "shortDescription": "Affectionate Cocker Spaniel who prefers being the only pet and loves cuddles.",
-    "image": "../images/dogs/charlie.jpg"
+    "image": "../images/dogs/charlie.jpg",
+     "reserved": true
   },
   {
     "id": "dog007",
