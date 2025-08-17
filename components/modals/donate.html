@@ -1,0 +1,95 @@
+<div class="modal fade donate-modal" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2 class="title">Your details</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form id="donor-details-form" class="needs-validation" novalidate>
+        <div class="modal-body">
+          <div class="row g-3">
+
+            <div class="col-12">
+              <label class="form-label fw-bold">Title <span class="text-danger">*</span></label>
+              <select class="form-select border-accent" name="title" required>
+                <option value="">- Select -</option>
+                <option>Ms</option>
+                <option>Mr</option>
+                <option>Dr</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold">First name <span class="text-danger">*</span></label>
+              <input class="form-control border-accent" name="firstName" pattern="[A-Za-z\s]+" title="Please enter letters only" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Last name <span class="text-danger">*</span></label>
+              <input class="form-control border-accent" name="lastName" pattern="[A-Za-z\s]+" title="Please enter letters only" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control border-accent" name="email" title="Please enter a valid email address" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Phone number</label>
+              <input type="tel" class="form-control border-accent" name="phone" pattern="^07\d{9}$" maxlength="11" placeholder="07XXXXXXXXX" title="Please enter a UK mobile starting with 07">
+            </div>
+
+            <div class="col-12"><hr class="my-3"></div>
+
+            <div class="col-12">
+              <label class="form-label fw-bold">Donation amount <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-accent">£</span>
+                <input class="form-control border-accent" id="donationAmount" name="amount" inputmode="decimal" placeholder="0.00" required>
+              </div>
+              <small class="text-muted">Numbers only, up to 2 decimals (e.g., 5 or 12.50).</small>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold">Name of account holder <span class="text-danger">*</span></label>
+              <input class="form-control border-accent" name="accName" pattern="[A-Za-z\s]+" title="Please enter letters only" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Account number <span class="text-danger">*</span></label>
+              <input class="form-control border-accent" name="accNumber" id="accNumber" inputmode="numeric" pattern="\d{8}" maxlength="8" title="Please enter exactly 8 digits" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Sort code <span class="text-danger">*</span></label>
+              <input class="form-control border-accent" id="sortCode" name="sortCode" inputmode="numeric" placeholder="00-00-00" maxlength="8" pattern="\d{2}-\d{2}-\d{2}" title="Please enter sort code in the format 00-00-00" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn submit-btn w-100">Confirm donation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Thank You Modal -->
+<div class="modal fade thankyou-modal" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-body text-center p-4">
+        <h5 class="confetti-emoji text-center" id="thankYouHeading">
+          🎊 Thank you, <span id="tyName">Friend</span>! 🎊
+        </h5>
+        <h1 class="thankyou-message mb-3" id="thankYouAmount">
+          Your £<span id="tyAmount">0.00</span> will help a pet today!
+        </h1>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn submit-btn" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
