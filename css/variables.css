@@ -1,26 +1,26 @@
 :root {
-  /* Brand Colors */
-  --color-primary: #5723e6;         
-  --color-secondary: #d0a0d3;      
-  --color-accent: #c580b1;         
-  --color-background: #f4f4fa;     
-  --color-text: #07050C;          
-  --color-heading: #07050c;        
+    /* Brand Colors */
+    --color-primary: #5723e6;
+    --color-secondary: #d0a0d3;
+    --color-accent: #c580b1;
+    --color-background: #f4f4fa;
+    --color-text: #07050c;
+    --color-heading: #07050c;
 
-  /* State Colors */
-  --color-success: #81ba83;
-  --color-error: #e3746c;
-  --color-warning: #f1be71;
+    /* State Colors */
+    --color-success: #81ba83;
+    --color-error: #e3746c;
+    --color-warning: #f1be71;
 
-  /* Font Sizes */
-  --font-small: 0.875rem;
-  --font-base: 1rem;
-  --font-large: 1.25rem;
-  --font-title: 2rem;
+    /* Font Sizes */
+    --font-small: 0.875rem;
+    --font-base: 1rem;
+    --font-large: 1.25rem;
+    --font-title: 2rem;
 
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
 }

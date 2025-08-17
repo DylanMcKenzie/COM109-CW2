@@ -1,20 +1,19 @@
-    @font-face {
-    font-family: 'DynaPuff';
-    src: url('../fonts/DynaPuff-VariableFont_wdth-wght.ttf') format('truetype');
+@font-face {
+    font-family: "DynaPuff";
+    src: url("../fonts/DynaPuff-VariableFont_wdth-wght.ttf") format("truetype");
     font-weight: normal;
-    font-style: normal;
-    }
-    
-    body {
-      margin: 0;
-      font-family: 'DynaPuff', sans-serif;
-      background-color: #f9f3fc;
-    }
-
-    @font-face {
-    font-family: 'DynaPuff-bold';
-    src: url('../fonts/DynaPuff-VariableFont_wdth-wght.ttf') format('truetype');
-    font-weight: bold;
     font-style: normal;
 }
 
+body {
+    margin: 0;
+    font-family: "DynaPuff", sans-serif;
+    background-color: #f9f3fc;
+}
+
+@font-face {
+    font-family: "DynaPuff-bold";
+    src: url("../fonts/DynaPuff-VariableFont_wdth-wght.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}

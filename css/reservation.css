@@ -1,64 +1,64 @@
 .submit-btn {
-  background-color: var(--color-secondary);
-  color: white;
+    background-color: var(--color-secondary);
+    color: white;
 }
 .border-accent {
-  border-color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 .title {
-  font-size: var(--font-title);
-  color: var(--color-text);
+    font-size: var(--font-title);
+    color: var(--color-text);
 }
 .info-subtitle {
-  font-weight: bold;
-  margin-bottom: 0px;
+    font-weight: bold;
+    margin-bottom: 0px;
 }
 .form-control:focus,
 .form-select:focus {
-  box-shadow: var(--color-accent);
-  border-color: var(--color-primary);
+    box-shadow: var(--color-accent);
+    border-color: var(--color-primary);
 }
 input[type="checkbox"] {
-  border-color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 input[type="checkbox"]:checked {
-  background-color: var(--color-secondary);
-  border-color: var(--color-secondary);
-  box-shadow: none;
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    box-shadow: none;
 }
 
 input[type="checkbox"]:focus {
-  box-shadow: none;
-  border-color: var(--color-accent);
+    box-shadow: none;
+    border-color: var(--color-accent);
 }
 
 input[type="date"] {
-  background-color: white;
-  color: var(--color-text);
+    background-color: white;
+    color: var(--color-text);
 }
 
 .pet-sidebar {
-  background-color: var(--color-background);
+    background-color: var(--color-background);
 }
 
 .reservation-header {
-  background: url('../images/paw-banner.png') center center no-repeat;
-  background-size: contain; 
-  text-align: center;
-  padding: 25px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
+    background: url("../images/paw-banner.png") center center no-repeat;
+    background-size: contain;
+    text-align: center;
+    padding: 25px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .reservation-title {
-  font-size: 3.2rem;
-  color: #3f2171; 
-  font-weight: normal;
-  margin: 0;
-  position: relative;
-  z-index: 2;
-  padding-right: 50px;
+    font-size: 3.2rem;
+    color: #3f2171;
+    font-weight: normal;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    padding-right: 50px;
 }
