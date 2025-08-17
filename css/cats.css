@@ -16,31 +16,6 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.page-subtitle {
-    font-size: 1.2rem;
-    color: var(--color-text);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.filters-section {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border: 2px solid var(--color-secondary);
-}
-
-.filters-section h3 {
-    color: var(--color-primary);
-    margin-bottom: 1.5rem;
-}
-
-.filter-group {
-    margin-bottom: 1rem;
-}
-
 .filter-label {
     font-weight: normal;
     color: var(--color-primary);
@@ -152,43 +127,6 @@
     background: white;
 }
 
-.cat-info {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.cat-name {
-    font-size: 1.5rem;
-    font-weight: normal;
-    color: var(--color-primary);
-    margin-bottom: 0.5rem;
-}
-
-.cat-breed {
-    font-size: 1rem;
-    color: var(--color-accent);
-    font-weight: normal;
-    margin-bottom: 0.5rem;
-}
-
-.cat-details {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: var(--color-text);
-}
-
-.cat-about {
-    color: var(--color-text);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    flex: 1;
-}
-
 .cat-traits {
     display: flex;
     gap: 0.5rem;
@@ -252,7 +190,7 @@
     align-items: center;
     gap: 0.6rem;
     padding: 0.6rem 0.8rem;
-    background: #fff;
+    background: white;
     border: 2px solid var(--color-secondary);
     border-radius: 20px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
@@ -309,4 +247,66 @@
 .loading i {
     font-size: 3rem;
     color: var(--color-primary);
+}
+
+.cat-info {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cat-name {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.cat-breed {
+    font-size: 1rem;
+    color: var(--color-accent);
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+}
+
+.cat-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+.cat-about {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.filters-section {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--color-secondary);
+}
+
+.filters-section h3 {
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.filter-group {
+    margin-bottom: 1rem;
 }

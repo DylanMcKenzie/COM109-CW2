@@ -115,7 +115,7 @@ $(document).ready(function () {
         const genderFilter = $("#gender-filter").val();
         const locationFilter = $("#location-filter").val();
         const nameSearch = $("#name-search").val().toLowerCase();
-        const favoritesFilter = $("#favorites-filter").val();
+    const favouritesFilter = $("#favourites-filter").val();
 
         filteredCats = allCats.filter((cat) => {
             if (nameSearch && !cat.name.toLowerCase().includes(nameSearch)) return false;
@@ -130,7 +130,7 @@ $(document).ready(function () {
             if (petsFilter && cat.goodWithOtherPets.toString() !== petsFilter) return false;
             if (genderFilter && cat.gender !== genderFilter) return false;
             if (locationFilter && cat.location !== locationFilter) return false;
-            if (favoritesFilter === "favorites" && !likedCats.includes(cat.id)) return false;
+            if (favouritesFilter === "favourites" && !likedCats.includes(cat.id)) return false;
 
             return true;
         });
@@ -139,7 +139,7 @@ $(document).ready(function () {
         updateStats();
     }
 
-    const filterSelectors = "#breed-filter, #age-filter, #children-filter, #pets-filter, #gender-filter, #location-filter, #favorites-filter";
+    const filterSelectors = "#breed-filter, #age-filter, #children-filter, #pets-filter, #gender-filter, #location-filter, #favourites-filter";
 
     $(filterSelectors).on("change", applyFilters);
     $("#name-search").on("input", applyFilters);
