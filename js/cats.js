@@ -175,6 +175,7 @@ $(document).ready(function () {
         const cat = allCats.find((c) => c.id === catId);
 
         if (cat) {
+            localStorage.removeItem('selectedDog');
             localStorage.setItem("selectedCat", JSON.stringify(cat));
             window.location.href = "reservation.html";
         }

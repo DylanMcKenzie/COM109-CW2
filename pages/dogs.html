@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cailo Dog Adoption</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="dogs.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script defer src="../js/dogs.js"></script>
-  <link rel="icon" href="favicon.ico" />
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adopt a Dog</title>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/styles.css" />
+        <link rel="stylesheet" href="../css/dogs.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script defer src="../js/dogs.js"></script>
+        <link href="../libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/variables.css" />
+        <link rel="stylesheet" href="../css/styles.css" />
+        <link rel="stylesheet" href="../css/navbar.css" />
+        <link rel="stylesheet" href="../css/footer.css" />
+        <link rel="stylesheet" href="../css/donate.css" />
+        <link rel="stylesheet" href="../css/dogs.css" />
+        <link rel="icon" href="favicon.ico" />
+    </head>
 
-<body>
-  <header class="custom-header">
-    <div class="top-left-img">
-        <img src="../images/cats/Cailo Logo.png" alt="Cailo Logo">
-    </div>
-    <div class="bottom-right-img">
-        <img src="../images/cats/paws.png" id="paws" alt="Paw Prints">
-    </div>
-    <div class="center-content">
-        <h1>Our Dogs</h1>
-        <label for="filterReserved">
-          <input type="checkbox" id="filterReserved" />
-          Show Reserved Dogs Only
-        </label>
-    </div>
-  </header>
+    <body>
+        <div id="navbar"></div>
+        <header class="custom-header">
+            <div class="center-content">
+                <h1>Our Dogs</h1>
+                <label for="filterReserved">
+                    <input type="checkbox" id="filterReserved" />
+                    Show Reserved Dogs Only
+                </label>
+            </div>
+        </header>
 
-  <main>
-    <section class="dog-list">
-      
-    </section>
-  </main>
-</body>
+        <main>
+            <section class="dog-list"></section>
+        </main>
+        <div id="footer"></div>
+        <script src="../libs/jquery/jquery-3.7.1.min.js"></script>
+        <script src="../libs/bootstrap/bootstrap.bundle.js"></script>
+        <script>
+            $("#navbar").load("../components/navbar/navbar.html", function () {
+                $.get("../components/modals/donate.html", function (html) {
+                    $("body").append(html);
+                    if (typeof initDonateModal === "function") initDonateModal();
+                });
+            });
+            $("#footer").load("../components/footer/footer.html");
+        </script>
+        <script src="../js/donate.js"></script>
+        <script src="../js/cats.js"></script>
+    </body>
 </html>

@@ -45,7 +45,12 @@ $(document).ready(function () {
                 console.error("No pet ID on button");
                 return;
             }
-            window.location.href = `reservation.html?id=${encodeURIComponent(petId)}`;
+            const dog = dogs.find(d => String(d.id) === String(petId));
+            if (dog) {
+                localStorage.removeItem('selectedCat');
+                localStorage.setItem('selectedDog', JSON.stringify(dog));
+                window.location.href = "reservation.html";
+            }
         });
     }).fail(function () {
         console.error("Could not load dogs JSON file.");
