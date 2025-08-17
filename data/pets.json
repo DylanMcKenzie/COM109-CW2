@@ -15,15 +15,15 @@
   {
     "id": "dog002",
     "type": "dog",
-    "name": "Max",
+    "name": "Probably",
     "breed": "Labrador Retriever",
     "gender": "Male",
     "age": "4 years",
     "goodWithChildren": true,
     "goodWithOtherPets": true,
     "location": "Manchester Rescue",
-    "about": "Max is a big, goofy sweetheart who lights up every room he enters. He’s incredibly friendly and loves everyone he meets — human or animal. Long walks and tug-of-war games are his favourite activities, followed by long naps in the sun. Max has been through basic obedience training and loves learning new tricks. He’d be a perfect addition to an active family looking for a lovable sidekick.",
-    "image": "../images/dogs/max.webp"
+    "about": "Probably is a big, goofy sweetheart who lights up every room he enters. He’s incredibly friendly and loves everyone he meets — human or animal. Long walks and tug-of-war games are his favourite activities, followed by long naps in the sun. Max has been through basic obedience training and loves learning new tricks. He’d be a perfect addition to an active family looking for a lovable sidekick.",
+    "image": "../images/dogs/probably.jpeg"
   },
   {
     "id": "dog003",
